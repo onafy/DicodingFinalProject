@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import onafy.kade_finalproject.Features.Favorites.FavoriteMatchFragment
 import onafy.kade_finalproject.Features.Favorites.FavoriteTeamsFragment
-import onafy.kade_finalproject.Features.Match.MatchListFragment
 
 class FavoritePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

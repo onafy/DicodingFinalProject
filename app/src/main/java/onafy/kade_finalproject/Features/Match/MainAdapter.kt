@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import onafy.kade_finalproject.ModelDataClass.Event
 import onafy.kade_finalproject.R
-import org.jetbrains.anko.*
+import org.jetbrains.anko.find
 
 class MainAdapter(private val context: Context, private val events: List<Event>,  val listener: (Event) -> Unit): RecyclerView.Adapter<EventViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=

@@ -10,11 +10,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import onafy.kade_finalproject.DB.FavoriteMatch
 import onafy.kade_finalproject.DB.database
 import onafy.kade_finalproject.Features.MatchDetail.DetailActivity
-import onafy.kade_finalproject.Features.TeamDetail.TeamDetailActivity
 import onafy.kade_finalproject.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser

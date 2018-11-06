@@ -1,13 +1,12 @@
 package onafy.kade_finalproject
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import onafy.kade_finalproject.Features.Favorites.FavoriteFragment
-import onafy.kade_finalproject.Features.Favorites.FavoriteTeamsFragment
 import onafy.kade_finalproject.Features.Match.MatchFragment
-import onafy.kade_finalproject.R.id.*
 import onafy.kade_finalproject.Features.Team.TeamsFragment
+import onafy.kade_finalproject.R.id.*
 
 
 class HomeActivity : AppCompatActivity() {

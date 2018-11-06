@@ -3,8 +3,8 @@ package onafy.kade_finalproject.Features.Team
 import com.google.gson.Gson
 import kotlinx.coroutines.experimental.async
 import onafy.kade_finalproject.Api.ApiRepository
-import onafy.kade_finalproject.ModelDataClass.TeamResponse
 import onafy.kade_finalproject.Api.TheSportDBApi
+import onafy.kade_finalproject.ModelDataClass.TeamResponse
 import onafy.kade_finalproject.Util.CoroutineContextProvider
 import org.jetbrains.anko.coroutines.experimental.bg
 

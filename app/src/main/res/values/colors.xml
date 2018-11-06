@@ -6,6 +6,7 @@
     <color name="pass_match">#fd0606</color>
     <color name="divider">#cccccc</color>
     <color name="ptih">#FFF</color>
+    <color name="LightGray">#DDDDDD</color>
     <color name="orange">#ffd000</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#727272</color>

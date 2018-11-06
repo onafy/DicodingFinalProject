@@ -1,6 +1,7 @@
 package onafy.kade_finalproject.Api
 
 import android.net.Uri
+import android.util.Log
 import onafy.kade_finalproject.BuildConfig
 
 object TheSportDBApi {
@@ -37,6 +38,19 @@ object TheSportDBApi {
                 .appendQueryParameter("l", league)
                 .build()
                 .toString()
+    }
+
+    fun getTeamPlayer(id: String?): String {
+        Log.d("id masuk", id)
+        val url = "lookup_all_players.php"
+        return BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?id=" + id
+    }
+
+    fun getTeamPlayers(id: String?): String {
+        Log.d("id masuk", id)
+        val url = "lookup_all_players.php"
+        return BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?id=" + id
+        Log.d("return url", BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?id=" + id)
     }
 
 }

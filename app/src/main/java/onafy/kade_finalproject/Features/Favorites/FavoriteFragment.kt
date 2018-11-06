@@ -10,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.activity_match.*
-
 import onafy.kade_finalproject.R
 import onafy.kade_finalproject.Util.FavoritePagerAdapter
-import onafy.kade_finalproject.Util.MatchPagerAdapter
 import org.jetbrains.anko.find
 
 class FavoriteFragment : Fragment() {

@@ -1,6 +1,8 @@
 package onafy.kade_finalproject.Features.Favorites
 
 
+//import onafy.kade_finalproject.DetailTeam.TeamsDetailActivity
+
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,11 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import onafy.kade_finalproject.DB.FavoriteTeam
-import onafy.kade_finalproject.Features.TeamDetail.TeamDetailActivity
-//import onafy.kade_finalproject.DetailTeam.TeamsDetailActivity
-
-import onafy.kade_finalproject.R.color.colorAccent
 import onafy.kade_finalproject.DB.database
+import onafy.kade_finalproject.Features.TeamDetail.TeamDetailActivity
+import onafy.kade_finalproject.R.color.colorAccent
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select

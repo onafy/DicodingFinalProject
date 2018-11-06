@@ -1,4 +1,4 @@
-package onafy.kade_finalproject.Features.Team
+package onafy.kade_finalproject.Features.TeamDetail.Player
 
 import android.content.Context
 import android.os.Bundle
@@ -6,16 +6,16 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import com.google.gson.Gson
 import onafy.kade_finalproject.Api.ApiRepository
-import onafy.kade_finalproject.Features.TeamDetail.TeamDetailActivity
-import onafy.kade_finalproject.ModelDataClass.Team
-
-import onafy.kade_finalproject.R.array.league
+import onafy.kade_finalproject.Features.TeamDetail.PlayerDetail.PlayerDetailActivity
+import onafy.kade_finalproject.ModelDataClass.Player
 import onafy.kade_finalproject.R.color.colorAccent
 import onafy.kade_finalproject.Util.invisible
 import onafy.kade_finalproject.Util.visible
@@ -25,44 +25,40 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
-    private var teams: MutableList<Team> = mutableListOf()
-    private lateinit var presenter: TeamsPresenter
-    private lateinit var adapter: TeamsAdapter
-    lateinit var Spinner: Spinner
-    lateinit var listEvent: RecyclerView
+class PlayerFragment : Fragment(), AnkoComponent<Context>, PlayerView {
+
+    private var players: MutableList<Player> = mutableListOf()
+    private lateinit var presenter: PlayerPresenter
+    private lateinit var adapters: PlayerAdapter
+    lateinit var listPlayer: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
-    private lateinit var leagueName: String
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val id = this.arguments?.getString("idTeam")
+        Log.d("idTeam",id)
 
-
-        val spinnerItems = resources.getStringArray(league)
-        val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
-        Spinner.adapter = spinnerAdapter
-
-        adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}", "teamDescription" to "${it.teamDescription}")
+        adapters = PlayerAdapter(players) {
+            ctx.startActivity<PlayerDetailActivity>(
+                    "Pict" to "${it.playerPict}",
+                    "Height" to "${it.playerHeight}",
+                    "Weight" to "${it.playerWeight}",
+                    "Position" to "${it.playerPosition}",
+                    "Desc" to "${it.playerDesc}"
+                    )
         }
-        listEvent.adapter = adapter
+        listPlayer.adapter = adapters
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = TeamsPresenter(this, request, gson)
-        Spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                leagueName = Spinner.selectedItem.toString()
-                presenter.getTeamList(leagueName)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
+        presenter = PlayerPresenter(this, request, gson)
+        presenter.getPlayerList(id)
 
         swipeRefresh.onRefresh {
-            presenter.getTeamList(leagueName)
+            presenter.getPlayerList(id)
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -74,10 +70,10 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
             lparams (width = matchParent, height = wrapContent)
             orientation = LinearLayout.VERTICAL
             topPadding = dip(16)
-            leftPadding = dip(16)
-            rightPadding = dip(16)
+            leftPadding = dip(10)
+            rightPadding = dip(10)
 
-            Spinner = spinner()
+
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(colorAccent,
                         android.R.color.holo_green_light,
@@ -87,7 +83,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
                 relativeLayout{
                     lparams (width = matchParent, height = wrapContent)
 
-                    listEvent = recyclerView {
+                    listPlayer = recyclerView {
                         lparams (width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }
@@ -109,11 +105,12 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<Team>) {
+    override fun showPlayerList(data: List<Player>) {
         swipeRefresh.isRefreshing = false
-        teams.clear()
-        teams.addAll(data)
-        adapter.notifyDataSetChanged()
+        players.clear()
+        players.addAll(data)
+        Log.d("Players", players.toString())
+        adapters.notifyDataSetChanged()
     }
 
 }

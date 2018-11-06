@@ -7,8 +7,6 @@ import onafy.kade_finalproject.Api.TheSportDBApi
 import onafy.kade_finalproject.ModelDataClass.TeamResponse
 import onafy.kade_finalproject.Util.CoroutineContextProvider
 import org.jetbrains.anko.coroutines.experimental.bg
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class TeamDetailPresenter(private val view: TeamDetailView,
                           private val apiRepository: ApiRepository,
