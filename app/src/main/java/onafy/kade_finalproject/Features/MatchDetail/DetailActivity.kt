@@ -57,6 +57,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
         declaration()
         favoriteState()
         showActionBar()
+
         val request = ApiRepository()
         val gson = Gson()
         presenter = DetailPresenter(this, request, gson)
@@ -107,6 +108,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     override fun showDetail(data: List<Event>) {
         swipeRefresh.isRefreshing = false
         eventdetail = Event(data[0].eventId,
+                data[0].eventType,
                 data[0].homeName,
                 data[0].awayName,
                 data[0].eventDate,

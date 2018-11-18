@@ -33,5 +33,7 @@
     <string name="berat_badan_m">Berat Badan (kg)</string>
     <string name="tinggi_badan_m">Tinggi Badan (m)</string>
     <string name="posisi">Posisi</string>
+    <string name="default_search">searching..</string>
+    <string name="match_search">searching for match..</string>
 
 </resources>

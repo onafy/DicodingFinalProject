@@ -26,4 +26,20 @@ class TeamsPresenter(private val view: TeamsView,
         }
     }
 
+
+    fun searchTeam(query: String) {
+        view.showLoading()
+        async(context.main){
+            val data = bg{
+                gson.fromJson(apiRepository
+                        .doRequest(TheSportDBApi.getSearchTeam(query)),
+                        TeamResponse::class.java
+                )
+            }
+            if (data.await().teams.isNotEmpty())
+                view.hideLoading()
+            view.showSearchTeam(data.await().teams)
+        }
+    }
+
 }

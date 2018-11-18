@@ -39,7 +39,7 @@ class TeamsAdapter(private val teams: List<Team>,  private val listener: (Team) 
 
     }
 
-
+// ================================== UI =======================================================
     class TeamUI: AnkoComponent<ViewGroup> {
         override fun createView(ui: AnkoContext<ViewGroup>): View {
             return with(ui){
@@ -66,5 +66,5 @@ class TeamsAdapter(private val teams: List<Team>,  private val listener: (Team) 
         }
 
     }
-
+ // ==============================================================================================
 

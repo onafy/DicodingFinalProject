@@ -18,6 +18,7 @@ class TeamDescFragment() : Fragment(), AnkoComponent<Context>, TeamDetailView {
 
     private lateinit var description: TextView
 
+    //=========================== Main fragment ====================================================
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         description.text = this.arguments?.getString("detailTeam") ?: "No Description for this team."
@@ -26,7 +27,12 @@ class TeamDescFragment() : Fragment(), AnkoComponent<Context>, TeamDetailView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return createView(AnkoContext.create(ctx))
     }
+    //=============================================================================================
 
+
+
+
+    //=================================== UI ==================================================
     override fun createView(ui: AnkoContext<Context>): View = with(ui){
         scrollView() {
             lparams (width = matchParent, height = wrapContent)
@@ -43,6 +49,9 @@ class TeamDescFragment() : Fragment(), AnkoComponent<Context>, TeamDetailView {
         }
     }
 
+    //==============================================================================================
+
+    //===================================== Function ==============================================
     override fun showLoading() {
     }
 
@@ -51,5 +60,5 @@ class TeamDescFragment() : Fragment(), AnkoComponent<Context>, TeamDetailView {
 
     override fun showTeamDetail(data: List<Team>) {
     }
-
+    //=============================================================================================
 }

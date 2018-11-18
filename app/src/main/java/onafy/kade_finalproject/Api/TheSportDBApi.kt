@@ -53,4 +53,29 @@ object TheSportDBApi {
         Log.d("return url", BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?id=" + id)
     }
 
+    fun getSearchMatch(query: String?): String {
+        val url = "searchevents.php"
+        return BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?e=" + replaceQuery(query)
+
+    }
+
+    fun getSearchTeam(query: String? =""): String {
+        val url = "searchteams.php"
+        return BuildConfig.BASE_URL + "/api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/$url?t=" + replaceQuery(query)
+    }
+
+
+    fun replaceQuery(query: String?): String? {
+        var query2 = query
+        if (query != null) {
+            if (query.contains(" ")) {
+                query2 = query.replace(" ","_")
+            }
+        }
+        return query2
+    }
+
+
+
+
 }

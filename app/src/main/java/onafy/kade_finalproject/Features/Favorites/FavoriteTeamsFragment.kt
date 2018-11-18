@@ -1,8 +1,6 @@
 package onafy.kade_finalproject.Features.Favorites
 
 
-//import onafy.kade_finalproject.DetailTeam.TeamsDetailActivity
-
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -24,19 +22,19 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class FavoriteTeamsFragment : Fragment() {
+class FavoriteTeamsFragment : Fragment() , AnkoComponent<Context>{
     private var favoriteTeams: MutableList<FavoriteTeam> = mutableListOf()
     private lateinit var adapter: FavoriteTeamsAdapter
-    private lateinit var listEvent: RecyclerView
+    private lateinit var listTeam: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteTeamsAdapter(favoriteTeams){
-           ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+           ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}",  "teamDescription" to "${it.teamDesc}")
         }
-        listEvent.adapter = adapter
+        listTeam.adapter = adapter
         showFavorite()
         swipeRefresh.onRefresh {
             favoriteTeams.clear()
@@ -51,7 +49,7 @@ class FavoriteTeamsFragment : Fragment() {
     }
 
 
-   fun createView(ui: AnkoContext<Context>): View = with(ui){
+   override fun createView(ui: AnkoContext<Context>): View = with(ui){
         linearLayout {
             lparams (width = matchParent, height = wrapContent)
             topPadding = dip(16)
@@ -64,7 +62,7 @@ class FavoriteTeamsFragment : Fragment() {
                         android.R.color.holo_orange_light,
                         android.R.color.holo_red_light)
 
-                listEvent = recyclerView {
+                listTeam = recyclerView {
                     lparams (width = matchParent, height = wrapContent)
                     layoutManager = LinearLayoutManager(ctx)
                 }

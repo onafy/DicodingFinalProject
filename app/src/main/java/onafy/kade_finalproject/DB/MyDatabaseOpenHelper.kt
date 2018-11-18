@@ -23,7 +23,8 @@ class MyDatabaseOpenHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "Favorite
                 FavoriteTeam.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 FavoriteTeam.TEAM_ID to TEXT + UNIQUE,
                 FavoriteTeam.TEAM_NAME to TEXT,
-                FavoriteTeam.TEAM_BADGE to TEXT)
+                FavoriteTeam.TEAM_BADGE to TEXT,
+                FavoriteTeam.TEAM_DESC to TEXT)
         db.createTable(FavoriteMatch.TABLE_FAVORITE, true,
                 FavoriteMatch.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 FavoriteMatch.EVENT_ID to TEXT + UNIQUE,

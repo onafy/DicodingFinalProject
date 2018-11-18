@@ -26,16 +26,34 @@ import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class PlayerFragment : Fragment(), AnkoComponent<Context>, PlayerView {
-
+    //=================================== declaration ===========================================
     private var players: MutableList<Player> = mutableListOf()
     private lateinit var presenter: PlayerPresenter
     private lateinit var adapters: PlayerAdapter
     lateinit var listPlayer: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    //============================================================================================
 
+
+
+    //================================ MAIN FRAGMENT =============================================
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setup()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return createView(AnkoContext.create(ctx))
+    }
+    //=============================================================================================
+
+
+
+
+
+    //================================ FUNCTION ===================================================
+    fun setup(){
         val id = this.arguments?.getString("idTeam")
         Log.d("idTeam",id)
 
@@ -46,7 +64,7 @@ class PlayerFragment : Fragment(), AnkoComponent<Context>, PlayerView {
                     "Weight" to "${it.playerWeight}",
                     "Position" to "${it.playerPosition}",
                     "Desc" to "${it.playerDesc}"
-                    )
+            )
         }
         listPlayer.adapter = adapters
 
@@ -61,10 +79,24 @@ class PlayerFragment : Fragment(), AnkoComponent<Context>, PlayerView {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return createView(AnkoContext.create(ctx))
+    override fun showLoading() {
+        progressBar.visible()
     }
 
+    override fun hideLoading() {
+        progressBar.invisible()
+    }
+
+    override fun showPlayerList(data: List<Player>) {
+        swipeRefresh.isRefreshing = false
+        players.clear()
+        players.addAll(data)
+        Log.d("Players", players.toString())
+        adapters.notifyDataSetChanged()
+    }
+    //====================================================================================================================
+
+    //============================== UI =========================================================================
     override fun createView(ui: AnkoContext<Context>): View = with(ui){
         linearLayout {
             lparams (width = matchParent, height = wrapContent)
@@ -97,20 +129,7 @@ class PlayerFragment : Fragment(), AnkoComponent<Context>, PlayerView {
         }
     }
 
-    override fun showLoading() {
-        progressBar.visible()
-    }
+    //==================================================================================================================
 
-    override fun hideLoading() {
-        progressBar.invisible()
-    }
-
-    override fun showPlayerList(data: List<Player>) {
-        swipeRefresh.isRefreshing = false
-        players.clear()
-        players.addAll(data)
-        Log.d("Players", players.toString())
-        adapters.notifyDataSetChanged()
-    }
 
 }

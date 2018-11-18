@@ -50,7 +50,9 @@ class PlayerAdapter(private val players: List<Player>, private val listener: (Pl
 
     }
 
+// ============================================================================================================
 
+//==================================== UI =======================================================================
     class TeamUI: AnkoComponent<ViewGroup> {
         override fun createView(ui: AnkoContext<ViewGroup>): View {
             return with(ui){
@@ -79,8 +81,8 @@ class PlayerAdapter(private val players: List<Player>, private val listener: (Pl
                     textView{
                         id= R.id.player_position
                         textSize= 16f
+                        leftPadding= dip(16)
                     }.lparams{
-                        margin= dip(15)
                         gravity = Gravity.CENTER_VERTICAL or Gravity.END
                     }
                 }
@@ -88,5 +90,6 @@ class PlayerAdapter(private val players: List<Player>, private val listener: (Pl
         }
 
     }
+//=======================================================================================================================
 
 

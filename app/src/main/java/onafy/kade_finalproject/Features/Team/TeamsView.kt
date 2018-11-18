@@ -6,4 +6,5 @@ interface TeamsView {
     fun showLoading()
     fun hideLoading()
     fun showTeamList(data: List<Team>)
+    fun showSearchTeam(data: List<Team>)
 }

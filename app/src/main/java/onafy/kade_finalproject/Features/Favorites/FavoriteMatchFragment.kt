@@ -23,7 +23,7 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class FavoriteMatchFragment : Fragment() {
+class FavoriteMatchFragment : Fragment() , AnkoComponent<Context>{
     private var favoriteMatch: MutableList<FavoriteMatch> = mutableListOf()
     private lateinit var adapter: FavoriteMatchAdapter
     private lateinit var listEvent: RecyclerView
@@ -53,7 +53,7 @@ class FavoriteMatchFragment : Fragment() {
     }
 
 
-    fun createView(ui: AnkoContext<Context>): View = with(ui){
+    override fun createView(ui: AnkoContext<Context>): View = with(ui){
         linearLayout {
             lparams (width = matchParent, height = wrapContent)
             topPadding = dip(16)

@@ -37,6 +37,7 @@ import org.jetbrains.anko.design.tabLayout
 import org.jetbrains.anko.support.v4.viewPager
 
 class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
+    //============================= Declaration ===================================================
     private lateinit var progressBar: ProgressBar
     private lateinit var appBar: AppBarLayout
     private lateinit var tab: TabLayout
@@ -65,9 +66,8 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         val idTeamFormedYear = 7
         val idTeamStadium = 8
         val idProgressBar = 9
-
     }
-
+    //==============================================================================================
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,6 +145,8 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
 
         // ========================================================================================
 
+
+        //================================== Main =================================================
         supportActionBar?.title = null
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -153,15 +155,12 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         viewPager = find(TeamDetailActivity.idViewPager)
         tab = find(TeamDetailActivity.idTab)
 
-
         val intent = intent
         id = intent.getStringExtra("id")
         teamDesc = intent.getStringExtra("teamDescription")
         Log.d("teamdesc", teamDesc)
 
         val teamAdapter = DetailTeamPagerAdapter(supportFragmentManager, id, teamDesc)
-      // loadDescFragment(teamDesc)
-
         viewPager.adapter = teamAdapter
         viewPager.currentItem = 0
         tab.setupWithViewPager(viewPager)
@@ -173,15 +172,20 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         presenter.getTeamDetail(id)
 
     }
+    //=============================================================================================
 
 
+
+    //====================================== Function ===========================================
     override fun showLoading() {
         progressBar.visible()
     }
 
+
     override fun hideLoading() {
         progressBar.invisible()
     }
+
 
     override fun showTeamDetail(data: List<Team>) {
         //display data on UI
@@ -193,6 +197,8 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
       //  teamDescription.text = data[0].teamDescription
         teamFormedYear.text = data[0].teamFormedYear
         teamStadium.text = data[0].teamStadium
+        Log.d("Teams", teams.toString())
+
     }
 
 
@@ -202,6 +208,8 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         setFavorite()
         return true
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -229,13 +237,16 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
                 insert(FavoriteTeam.TABLE_FAVORITE,
                         FavoriteTeam.TEAM_ID to teams.teamId,
                         FavoriteTeam.TEAM_NAME to teams.teamName,
-                        FavoriteTeam.TEAM_BADGE to teams.teamBadge)
+                        FavoriteTeam.TEAM_BADGE to teams.teamBadge,
+                        FavoriteTeam.TEAM_DESC to teamDesc)
             }
             Toast.makeText(this, "Added to favorite", LENGTH_LONG).show()
         } catch (e: SQLiteConstraintException){
             Toast.makeText(this, e.localizedMessage, LENGTH_LONG).show()
         }
     }
+
+
 
     private fun removeFromFavorite(){
         try {
@@ -249,12 +260,16 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         }
     }
 
+
+
     private fun setFavorite() {
         if (isFavorite)
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_added_to_favorites)
         else
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
     }
+
+
 
     private fun favoriteState(){
         try{
@@ -270,3 +285,4 @@ class TeamDetailActivity : AppCompatActivity() , TeamDetailView{
         }
     }
 }
+//=================================================================================================

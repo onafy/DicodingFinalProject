@@ -19,7 +19,10 @@ data class Team(
     var teamStadium: String = "",
 
     @SerializedName("strDescriptionEN")
-    var teamDescription: String = ""
+    var teamDescription: String = "",
+
+    @SerializedName("strSport")
+    var teamType: String = ""
 
 
 )

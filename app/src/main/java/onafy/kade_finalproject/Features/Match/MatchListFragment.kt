@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,8 +58,7 @@ class MatchListFragment : Fragment(), AnkoComponent<Context>, MainView {
                     "homeId" to it.homeId,
                     "awayId" to it.awayId))
         }
-        eventType = this.arguments?.getString("matchType") ?:""
-        Log.d("eventtype", eventType)
+        eventType = this.arguments?.getString("matchType") ?:"Past Event"
         listEvent.adapter = adapter
         val request = ApiRepository()
         val gson = Gson()
@@ -76,8 +74,7 @@ class MatchListFragment : Fragment(), AnkoComponent<Context>, MainView {
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                events.clear()
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 eventName = spinner.selectedItem.toString()
                 presenter.getEventList(parseEventName(eventName), eventType)
             }
@@ -95,7 +92,7 @@ class MatchListFragment : Fragment(), AnkoComponent<Context>, MainView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return createView(AnkoContext.create(ctx))
     }
-
+ //==================================== UI ========================================================
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         linearLayout {
